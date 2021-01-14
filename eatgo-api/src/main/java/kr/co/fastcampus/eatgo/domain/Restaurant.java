@@ -1,16 +1,23 @@
 package kr.co.fastcampus.eatgo.domain;
 
-import org.springframework.boot.autoconfigure.condition.ConditionEvaluationReport;
-
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Restaurant {
 
+    @Id
+    @GeneratedValue
     private long id;
+
     private String name;
     private String address;
 
+    @Transient // 잠깐 무시
     private List<MenuItem> menuItems = new ArrayList<>();
 
     public Restaurant() {
