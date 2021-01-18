@@ -42,4 +42,10 @@ public class RestaurantController {
         URI location = new URI("/restaurants/" + restaurant.getId());
         return ResponseEntity.created(location).body("{}");
     }
+
+    @PatchMapping("/restaurants/{id}")
+    public String update(@PathVariable("id") Long id, @RequestBody Restaurant resource) {
+        restaurantService.updateRestaureant(id, resource.getName(), resource.getAddress());
+        return "{}";
+    }
 }
