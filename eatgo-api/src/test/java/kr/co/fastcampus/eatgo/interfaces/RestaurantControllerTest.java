@@ -1,18 +1,19 @@
 package kr.co.fastcampus.eatgo.interfaces;
 
 import kr.co.fastcampus.eatgo.application.RestaurantService;
-import kr.co.fastcampus.eatgo.domain.*;
+import kr.co.fastcampus.eatgo.domain.MenuItem;
+import kr.co.fastcampus.eatgo.domain.Restaurant;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.Matchers.containsString;
@@ -34,7 +35,8 @@ class RestaurantControllerTest {
     @Test
     public void list() throws Exception {
         List<Restaurant> restaurants = new ArrayList<>();
-        restaurants.add(new Restaurant(1004L, "Bob Zip", "Seoul"));
+        restaurants.add(Restaurant.builder()
+                .id(1004L).name("Bob Zip").address("Seoul").build());
 
         given(restaurantService.getRestaurants()).willReturn(restaurants);
 
@@ -46,11 +48,14 @@ class RestaurantControllerTest {
 
     @Test
     public void detail() throws Exception {
-        Restaurant restaurant1 = new Restaurant(1004L, "Bob Zip", "Seoul");
-        restaurant1.addMenuItem(new MenuItem("Kimchi"));
+        Restaurant restaurant1 = Restaurant.builder()
+                .id(1004L).name("Bob Zip").address("Seoul").build();
+        restaurant1.setMenuItems(Arrays.asList(MenuItem.builder().name("Kimchi").build()));
 
-        Restaurant restaurant2 = new Restaurant(2020L, "Cyber Food", "Seoul");
-        restaurant2.addMenuItem(new MenuItem("Kimchi"));
+
+        Restaurant restaurant2 = Restaurant.builder()
+                .id(2020L).name("Cyber Food").address("Seoul").build();
+        restaurant2.setMenuItems(Arrays.asList(MenuItem.builder().name("Kimchi").build()));
 
         given(restaurantService.getRestaurant(1004L)).willReturn(restaurant1);
         given(restaurantService.getRestaurant(2020L)).willReturn(restaurant2);

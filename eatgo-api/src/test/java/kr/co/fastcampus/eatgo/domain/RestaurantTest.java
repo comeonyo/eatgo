@@ -7,7 +7,11 @@ class RestaurantTest {
 
     @Test
     public void creation() {
-        Restaurant restaurant = new Restaurant(1004L, "Bob Zip", "Seoul");
+        Restaurant restaurant = Restaurant.builder()
+                .id(1004L)
+                .name("Bob Zip")
+                .address("Seoul")
+                .build();
 
         Assertions.assertEquals(restaurant.getId(), 1004L);
         Assertions.assertEquals(restaurant.getName(), "Bob Zip");
@@ -16,7 +20,11 @@ class RestaurantTest {
 
     @Test
     public void information() {
-        Restaurant restaurant = new Restaurant(1004L, "Bob Zip", "Seoul");
+        Restaurant restaurant = Restaurant.builder()
+                .id(1004L)
+                .name("Bob Zip")
+                .address("Seoul")
+                .build();
 
         Assertions.assertEquals(restaurant.getInformation(), "Bob Zip in Seoul");
     }
