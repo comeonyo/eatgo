@@ -1,9 +1,6 @@
 package kr.co.fastcampus.eatgo.application;
 
-import kr.co.fastcampus.eatgo.domain.MenuItem;
-import kr.co.fastcampus.eatgo.domain.MenuItemRepository;
-import kr.co.fastcampus.eatgo.domain.Restaurant;
-import kr.co.fastcampus.eatgo.domain.RestaurantRepository;
+import kr.co.fastcampus.eatgo.domain.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -28,9 +25,6 @@ class RestaurantServiceTest {
     private MenuItemRepository menuItemRepository;
 
     public RestaurantServiceTest() {
-//        restaurantRepository = new RestaurantRepositoryImpl();
-//        menuItemRepository = new MenuItemRepositoryImpl();
-
         MockitoAnnotations.openMocks(this);
 
         mockRestaurantRepository();
@@ -72,12 +66,18 @@ class RestaurantServiceTest {
     }
 
     @Test
-    public void getRestaurant() {
+    public void getRestaurantWithExist() {
         Restaurant restaurant = restaurantService.getRestaurant(1004L);
         Assertions.assertEquals(restaurant.getId(), 1004L);
 
         MenuItem menuItem = restaurant.getMenuItems().get(0);
         Assertions.assertEquals(menuItem.getName(), "Kimchi");
+    }
+
+    @Test
+    public void getRestaurantWithNotExist() {
+        Assertions.assertThrows(RestaurantNotFoundException.class,
+                () -> restaurantService.getRestaurant(40404L));
     }
 
     @Test
