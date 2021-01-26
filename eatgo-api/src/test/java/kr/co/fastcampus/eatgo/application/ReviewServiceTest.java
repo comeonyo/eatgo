@@ -1,5 +1,6 @@
 package kr.co.fastcampus.eatgo.application;
 
+import kr.co.fastcampus.eatgo.domain.Restaurant;
 import kr.co.fastcampus.eatgo.domain.Review;
 import kr.co.fastcampus.eatgo.domain.ReviewRepository;
 import org.junit.jupiter.api.Test;
@@ -24,13 +25,18 @@ class ReviewServiceTest {
 
     @Test
     public void addReview() {
+        Restaurant restaurant = Restaurant.builder()
+                .name("Bob Zip")
+                .address("Seoul")
+                .build();
+
         Review review = Review.builder()
                 .name("JOKER")
                 .score(3)
                 .description("mat it da")
                 .build();
 
-        reviewService.addReview(review);
+        reviewService.addReview(restaurant.getId(), review);
 
         verify(reviewRepository).save(any());
     }

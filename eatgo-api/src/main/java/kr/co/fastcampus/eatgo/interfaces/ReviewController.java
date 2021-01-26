@@ -29,7 +29,7 @@ public class ReviewController {
             @PathVariable("restaurantId") Long restaurantId,
             @Valid @RequestBody Review resource
     ) throws URISyntaxException {
-        Review review = reviewService.addReview(resource);
+        Review review = reviewService.addReview(restaurantId, resource);
 
         URI location = new URI("/restaurants/" + restaurantId +
                 "/reviews/" + review.getId());

@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -32,7 +33,7 @@ class ReviewControllerTest {
 
     @Test
     public void createWithValidAttributes() throws Exception {
-        given(reviewService.addReview(any())).willReturn(
+        given(reviewService.addReview(any(), any())).willReturn(
                 Review.builder().id(123L).build()
         );
 
@@ -42,7 +43,7 @@ class ReviewControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(header().string("location", "/restaurants/1/reviews/123"));
 
-        verify(reviewService).addReview(any());
+        verify(reviewService).addReview(eq(1L), any());
     }
 
     @Test
@@ -52,7 +53,7 @@ class ReviewControllerTest {
                 .content("{}"))
                 .andExpect(status().isBadRequest());
 
-        verify(reviewService, never()).addReview(any());
+        verify(reviewService, never()).addReview(eq(1L), any());
     }
 
 
