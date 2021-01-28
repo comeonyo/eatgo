@@ -48,7 +48,8 @@ public class RestaurantService {
 
     @Transactional
     public Restaurant updateRestaureant(Long id, String name, String address) {
-        Restaurant restaurant = restaurantRepository.findById(id).orElse(null);
+        Restaurant restaurant = restaurantRepository.findById(id)
+                .orElseThrow(() -> new RestaurantNotFoundException(id));
 
         restaurant.updateInformation(name, address);
 

@@ -30,7 +30,7 @@ class MenuItemServiceTest {
 
     @Test
     public void bulkUpdate() {
-        List<MenuItem> menuItems = new ArrayList<MenuItem>();
+        List<MenuItem> menuItems = new ArrayList<>();
 
         menuItems.add(MenuItem.builder().name("Kimchi").build());
         menuItems.add(MenuItem.builder().id(3L).name("Gukbob").build());
