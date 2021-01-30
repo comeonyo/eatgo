@@ -1,13 +1,19 @@
 package kr.co.fastcampus.eatgo.application;
 
+import kr.co.fastcampus.eatgo.domain.MenuItem;
 import kr.co.fastcampus.eatgo.domain.Restaurant;
 import kr.co.fastcampus.eatgo.domain.Review;
 import kr.co.fastcampus.eatgo.domain.ReviewRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
 class ReviewServiceTest {
@@ -24,21 +30,16 @@ class ReviewServiceTest {
     }
 
     @Test
-    public void addReview() {
-        Restaurant restaurant = Restaurant.builder()
-                .name("Bob Zip")
-                .address("Seoul")
-                .build();
+    public void getReviews() {
+        List<Review> mockReviews = new ArrayList<>();
+        mockReviews.add(Review.builder().description("Cool!").build());
 
-        Review review = Review.builder()
-                .name("JOKER")
-                .score(3)
-                .description("mat it da")
-                .build();
+        given(reviewRepository.findAll()).willReturn(mockReviews);
 
-        reviewService.addReview(restaurant.getId(), review);
+        List<Review> reviews = reviewService.getReviews();
 
-        verify(reviewRepository).save(any());
+        Review review = reviews.get(0);
+
+        Assertions.assertEquals(review.getDescription(), "Cool!");
     }
-
 }
