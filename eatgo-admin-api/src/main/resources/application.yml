@@ -1,0 +1,23 @@
+#
+#spring.datasource.url=jdbc:h2:tcp://localhost/~/test
+#spring.datasource.driver-class-name=org.h2.Driver
+#spring.datasource.username=sa
+#spring.jpa.show-sql=true
+#spring.jpa.hibernate.ddl-auto=create
+
+spring:
+  datasource:
+    url: jdbc:h2:~/data/eatgo
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+
+---
+
+spring:
+  profiles:
+    active: test
+  datasource:
+    url: jdbc:h2:mem:test
+
