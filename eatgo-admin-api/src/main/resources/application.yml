@@ -17,13 +17,14 @@ spring:
 
 
 ---
-#
-#spring:
-#  profiles:
-#    active: test
-#  datasource:
-#    url: jdbc:h2:mem:test
-#  h2:
-#    console:
-#      enabled: true
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:test
+  h2:
+    console:
+      enabled: true
+  config:
+    activate:
+      on-profile: test
 

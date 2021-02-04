@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface  RestaurantRepository extends CrudRepository<Restaurant, Long> {
     List<Restaurant> findAll();
 
-    List<Restaurant> findAllByAddressContaining(String address);
+    List<Restaurant> findAllByAddressContainingAndCategoryId(String address, Long categoryId);
 
     Optional<Restaurant> findById(Long id);
 
