@@ -8,5 +8,4 @@ public interface CategoryRepository extends CrudRepository<Category, Long> {
 
     List<Category> findAll();
 
-    Category save();
 }
